@@ -53,29 +53,29 @@ export const navItems: NavData[] = [
           },
           {
             name: 'Part 3: Conversations',
-            url: '/subjects',
+            url: '/Part3',
           },
           {
             name: 'Part 4: Talks',
-            url: '/subjects',
+            url: '/Part4',
           },
           {
             name: 'Part 5: Incomplete Sentences',
-            url: '/subjects',
+            url: '/Part5',
           },
           {
             name: 'Part 6: Text Completion',
-            url: '/subjects',
+            url: '/Part6',
           },
           {
             name: 'Part 7: Single Passages & Multiple Passages',
-            url: '/subjects',
+            url: '/Part7',
           },
         ]
       },
       {
         name: 'LET US TEST!!',
-        url: '/classes',
+        url: '/Photo',
         icon: 'icon-book-open'
       },
       {
@@ -84,18 +84,8 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'History',
-        url: '/users',
-        icon: 'icon-notebook'
-      },
-      {
         name: 'Help',
         url: '/students',
-        icon: 'icon-pin'
-      },
-      {
-        name: 'PART1',
-        url: '/Photo',
         icon: 'icon-pin'
       },
     ]

@@ -68,6 +68,11 @@ import { ClassComponent } from './views/class/class.component';
 import { SubjectComponent } from './views/subject/subject.component';
 import { SubjectComponent1 } from './views/subject 1/subject1.component';
 import { SubjectComponent2 } from './views/subject 2/subject2.component';
+import { SubjectComponent3 } from './views/subject 3/subject3.component';
+import { SubjectComponent4 } from './views/subject 4/subject4.component';
+import { SubjectComponent5 } from './views/subject 5/subject5.component';
+import { SubjectComponent6 } from './views/subject 6/subject6.component';
+import { SubjectComponent7 } from './views/subject 7/subject7.component';
 import { FormInputComponent } from './controls/form-input/form-input.component';
 import { FormSelectComponent } from './controls/form-select/form-select.component';
 import { StudentComponent } from './views/student/student.component';
@@ -145,6 +150,11 @@ import { QuizComponent } from './views/quiz/quiz.component';
     SubjectComponent,
     SubjectComponent1,
     SubjectComponent2,
+    SubjectComponent3,
+    SubjectComponent4,
+    SubjectComponent5,
+    SubjectComponent6,
+    SubjectComponent7,
     QuizComponent,
   ],
   providers: [

@@ -26,6 +26,11 @@ import { StudentTestComponent } from './views/student-test/student-test.componen
 import { SubjectComponent } from './views/subject/subject.component';
 import { SubjectComponent1 } from './views/subject 1/subject1.component';
 import { SubjectComponent2 } from './views/subject 2/subject2.component';
+import { SubjectComponent3 } from './views/subject 3/subject3.component';
+import { SubjectComponent4 } from './views/subject 4/subject4.component';
+import { SubjectComponent5 } from './views/subject 5/subject5.component';
+import { SubjectComponent6 } from './views/subject 6/subject6.component';
+import { SubjectComponent7 } from './views/subject 7/subject7.component';
 import { QuizComponent } from './views/quiz/quiz.component';
 export const routes: Routes = [
   {
@@ -188,6 +193,76 @@ export const routes: Routes = [
         component: SubjectComponent2,
         data: {
           title: 'Part2'
+        }
+      },
+      {
+        path: 'Part3',
+        component: SubjectComponent3,
+        data: {
+          title: 'Part3'
+        }
+      },
+      {
+        path: 'Part3/:id',
+        component: SubjectComponent3,
+        data: {
+          title: 'Part3'
+        }
+      },
+      {
+        path: 'Part4',
+        component: SubjectComponent4,
+        data: {
+          title: 'Part4'
+        }
+      },
+      {
+        path: 'Part4/:id',
+        component: SubjectComponent4,
+        data: {
+          title: 'Part4'
+        }
+      },
+      {
+        path: 'Part5',
+        component: SubjectComponent5,
+        data: {
+          title: 'Part5'
+        }
+      },
+      {
+        path: 'Part5/:id',
+        component: SubjectComponent5,
+        data: {
+          title: 'Part5'
+        }
+      },
+      {
+        path: 'Part6',
+        component: SubjectComponent6,
+        data: {
+          title: 'Part6'
+        }
+      },
+      {
+        path: 'Part6/:id',
+        component: SubjectComponent6,
+        data: {
+          title: 'Part6'
+        }
+      },
+      {
+        path: 'Part7',
+        component: SubjectComponent7,
+        data: {
+          title: 'Part7'
+        }
+      },
+      {
+        path: 'Part7/:id',
+        component: SubjectComponent7,
+        data: {
+          title: 'Part7'
         }
       },
       {
