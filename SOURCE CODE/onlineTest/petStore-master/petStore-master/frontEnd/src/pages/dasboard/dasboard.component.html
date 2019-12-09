@@ -1,0 +1,81 @@
+<nz-layout class="left-layout">
+  <nz-sider nzWidth="200px" nzTheme="light">
+    <div class="logo">
+      <nz-avatar [nzSize]="64" nzIcon="user" nzSrc={{photoUrl}}></nz-avatar>
+      <h3>{{currentUser.name}}</h3>
+    </div>
+
+    <ul nz-menu nzMode="inline" class="sider-menu">
+      <li nz-menu-item (click)="dashboardPage()">
+        <fa name="home"></fa> Dashboard
+      </li>
+      <li nz-menu-item (click)="myaccountPage()">
+        <fa name="user"></fa> My account
+      </li>
+      <li nz-menu-item (click)="trainingsPage()" class='trainMenu'>
+        <fa name="cog"></fa> Let's Training!!!
+      </li>
+      <li nz-menu-item (click)="permissionsPage()" class='roleMenu'>
+        <fa name="cog"></fa> Roles management
+      </li>
+      <li nz-menu-item (click)="questionsPage()" class='quesMenu'>
+        <fa name="cog"></fa> Question management
+      </li>
+      <!-- <li nz-menu-item nzSelected (click)="petsPage()" class="petsMenu">
+        <fa name="lemon-o	"></fa> Pets
+      </li> -->
+
+      <li nz-menu-item (click)="customersPage()" class="customersMenu">
+        <fa name="users"></fa> Customers
+      </li>
+    </ul>
+
+  </nz-sider>
+  <nz-layout class="right-layout">
+    <nz-header>
+      <div class="top-left">
+        <!-- <nz-input-group [nzSuffix]="suffixIconSearch" class="searchBar">
+                    <input type="text" nz-input placeholder="input search text" />
+                  </nz-input-group>
+                  <ng-template #suffixIconSearch>
+                    <i nz-icon nzType="search"></i>
+                  </ng-template> -->
+      </div>
+      <div class="div top-right">
+        <nz-button-group [nzSize]="size">
+          <button nz-button nzType="primary" (click)="dasboardPage()" disabled><i nz-icon nzType="left"></i></button>
+          <button nz-button nzType="primary"><i nz-icon nzType="right"></i></button>
+        </nz-button-group>
+
+        <button nz-button nzType="default" class="logoutBtn" (click)="logoutClick()">Log out</button>
+      </div>
+
+
+    </nz-header>
+    <nz-content >
+      <div class="inner-content" style="border-style: solid; ">
+        <h2>Dashboard</h2>
+        <h3>Process of completion of the project</h3>
+        <nz-progress [nzPercent]="80.0" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"></nz-progress>
+        <h3>Member rating under 80 point</h3>
+        <nz-progress [nzPercent]="90" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active">
+        </nz-progress>
+        <h3>Today Update</h3>
+        <nz-progress nzType="dashboard" [nzPercent]="100" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }">
+        </nz-progress>
+        <br />
+        <br />
+        <br />
+        <div 
+          style="background-image: url(../assets/image/121177.jpg);background-size: 100%; border: 1px solid black;">
+          <h2 style="color:azure">MORE LESSON FOR TODAY</h2>
+          <br />
+          <button nz-button nzType="primary" (click)="letClick()" style="margin-bottom: 30px;"><b>LET'S GOOOOOO</b></button>
+          <br />
+        </div>
+      </div>
+    </nz-content>
+    <nz-footer>Online Test ©2019 Design and code by alien</nz-footer>
+  </nz-layout>
+
+</nz-layout>

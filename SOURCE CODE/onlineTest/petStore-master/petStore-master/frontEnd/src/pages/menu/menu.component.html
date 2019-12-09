@@ -1,0 +1,25 @@
+<ul nz-menu nzMode="inline" class="sider-menu" >
+  <ul nz-menu nzMode="inline" class="sider-menu">
+    <li nz-menu-item (click)="dashboardPage()">
+      <fa name="home"></fa> Dashboard
+    </li>
+    <li nz-menu-item (click)="myaccountPage()">
+      <fa name="user"></fa> My account
+    </li>
+    <li nz-menu-item (click)="trainingsPage()" class='trainMenu'>
+        <fa name="cog"></fa> Let's Training!!!
+      </li>
+    <li nz-menu-item (click)="permissionsPage()" class='roleMenu'>
+      <fa name="cog"></fa> Roles management
+    </li>
+    <li nz-menu-item (click)="questionsPage()" class='quesMenu'>
+      <fa name="cog"></fa> Question management
+    </li>
+    <li nz-menu-item nzSelected (click)="petsPage()" class="petsMenu">
+      <fa name="lemon-o	"></fa> Pets
+    </li>
+    <li nz-menu-item (click)="customersPage()" class="customersMenu">
+      <fa name="users"></fa> Customers
+    </li>
+  </ul>
+  </ul>

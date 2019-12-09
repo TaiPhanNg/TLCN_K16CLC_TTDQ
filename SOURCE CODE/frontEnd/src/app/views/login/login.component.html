@@ -1,49 +1,56 @@
-<div class="app-body">
-  <main class="main d-flex align-items-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <div class="card-group">
-            <div class="card p-4">
-              <div class="card-body">
-                <form>
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
-                  </div>
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
-                  </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <button type="button" class="btn btn-primary px-4">Login</button>
-                    </div>
-                    <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-              <div class="card-body text-center">
-                <div>
-                  <h2>Sign up</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  <button type="button" class="btn btn-primary active mt-3">Register Now!</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<nz-layout class="left-layout">
+  <nz-sider nzWidth="200px" nzTheme="light">
+      <div class="logo">
+          <nz-avatar [nzSize]="64" nzIcon="user" nzSrc={{currentUser.photoUrl}}></nz-avatar>
+        <h3>{{currentUser.name}}</h3>
       </div>
-    </div>
-  </main>
-</div>
+
+      <ul nz-menu nzMode="inline" class="sider-menu" >
+          <li nz-menu-item   (click)="dashboardPage()">
+            <fa name="home" ></fa> Dashboard
+          </li>
+          <li nz-menu-item  (click)="myaccountPage()">
+            <fa name="user"></fa> My account
+          </li>
+          <li nz-menu-item  (click)="permissionsPage()" class='roleMenu'>
+            <fa name="cog"></fa> Roles management
+          </li>
+          <li nz-menu-item  (click)="petsPage()" class="petsMenu">
+            <fa name="lemon-o	"></fa> Pets
+          </li>
+          <li nz-menu-item  nzSelected (click)="customersPage()" class="customersMenu">
+            <fa name="users"></fa> Customers
+          </li>
+        </ul>
+
+  </nz-sider>
+  <nz-layout class="right-layout">
+    <nz-header>
+      <div class="top-left">
+        <!-- <nz-input-group [nzSuffix]="suffixIconSearch" class="searchBar">
+                    <input type="text" nz-input placeholder="input search text" />
+                  </nz-input-group>
+                  <ng-template #suffixIconSearch>
+                    <i nz-icon nzType="search"></i>
+                  </ng-template> -->
+      </div>
+      <div class="div top-right">
+        <nz-button-group [nzSize]="size">
+          <button nz-button nzType="primary" (click)="dasboardPage()" disabled><i nz-icon nzType="left"></i></button>
+          <button nz-button nzType="primary"><i nz-icon nzType="right"></i></button>
+        </nz-button-group>
+
+        <button nz-button nzType="default" class="logoutBtn" (click)="logoutClick()">Log out</button>
+      </div>
+
+
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+          <app-listcustomers></app-listcustomers>
+      </div>
+    </nz-content>
+    <nz-footer>MyPet ©2019 Design and code by alien</nz-footer>
+  </nz-layout>
+
+</nz-layout>

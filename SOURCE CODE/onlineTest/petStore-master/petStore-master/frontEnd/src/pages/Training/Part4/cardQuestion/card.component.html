@@ -1,0 +1,269 @@
+<nz-card [nzCover]="coverTemplate" style="width: auto;" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+  <h2>"Task {{data.task}}"</h2>
+  <audio style="width: 300px;"  src="{{data.audio}}" class='audio' controls></audio>
+  <div class="question" style="font-size: 25px;white-space: pre-line">{{data.question}}</div>
+  <br />
+  
+  <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="log($event)">
+    <label nz-radio nzValue="{{data.answer_a}}" [nzDisabled]=" isDisabledButton">{{data.answer_a}}</label>
+    <label nz-radio nzValue="{{data.answer_b}}" [nzDisabled]=" isDisabledButton">{{data.answer_b}}</label>
+    <label nz-radio nzValue="{{data.answer_c}}" [nzDisabled]=" isDisabledButton">{{data.answer_c}}</label>
+    <label nz-radio nzValue="{{data.answer_d}}" [nzDisabled]=" isDisabledButton">{{data.answer_d}}</label>
+    <ng-template #coverTemplate style="size:200;">
+      <img sizes="width: 200px; height: 200px" src="{{data.image}}" />
+      
+    </ng-template>
+  </nz-radio-group>
+  <br />
+  <br />
+  <button nz-button nzType="primary" (click)="showAnswer()">Submit</button>
+  <br />
+  <div class="answer_correct" id="correct">
+    Your correct answer is:
+    {{correctAnswer}}</div>
+</nz-card>
+<!-- <ng-template #coverTemplate style="size:200;" >
+  <nz-avatar [nzSize]="198" nzIcon="user"></nz-avatar>
+</ng-template> -->
+<!-- <ng-template #actionSetting>
+  <i nz-icon nzType="delete" nz-popconfirm nzPopconfirmTitle="Are you sure?" nzOkText="ok" nzCancelText="cancel"
+    (nzOnConfirm)="deleteQuestion()"></i>
+  <ng-template #iconTpl>
+    <i nz-icon nzType="question-circle-o" style="color: red;"></i>
+  </ng-template>
+</ng-template> -->
+<!-- <ng-template #actionEdit>
+  <i nz-icon nzType="edit" (click)="showModal()"></i>
+</ng-template>
+<ng-template #actionEllipsis>
+  <i nz-icon nzType="ellipsis" (click)="detailClick()"></i>
+</ng-template> -->
+
+<!-- modal -->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Edit your question" [nzFooter]="null" (nzOnCancel)="handleCancel()">
+
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+    <!-- question -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Info</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="question" placeholder="{{data.question}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your question!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- audio -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Audio</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="audio" placeholder="{{data.audio}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container>
+            Please input your audio !
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- image -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Image link</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="image" placeholder="{{data.image}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container>
+            Please input your question image!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- is_Deleted -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>is_Deleted</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-select [(ngModel)]="selectedis_Deleted" nzAllowClear
+          nzPlaceHolder="{{data.is_Deleted === true ? 'True' : 'False'}}" formControlName="is_Deleted">
+          <nz-option nzValue="true" nzLabel="True"></nz-option>
+          <nz-option nzValue="false" nzLabel="False"></nz-option>
+        </nz-select>
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please define your question!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- answer_a -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>A</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="answer_a" placeholder="{{data.answer_a}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your answer!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- answer_b -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>B</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="answer_b" placeholder="{{data.answer_b}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your answer!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- answer_c -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>C</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="answer_c" placeholder="{{data.answer_c}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your answer!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- answer_d -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>D</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="answer_d" placeholder="{{data.answer_d}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your answer!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- answer_correct -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Correct answer</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="answer_correct" placeholder="{{data.answer_correct}}" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your correct answer!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- part -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Provider</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-select [(ngModel)]="selectedPart" nzAllowClear nzPlaceHolder="{{data.part}}" formControlName="part">
+          <nz-option nzValue="1" nzLabel="1"></nz-option>
+          <nz-option nzValue="2" nzLabel="2"></nz-option>
+          <nz-option nzValue="3" nzLabel="3"></nz-option>
+          <nz-option nzValue="4" nzLabel="4"></nz-option>
+          <nz-option nzValue="5" nzLabel="5"></nz-option>
+          <nz-option nzValue="6" nzLabel="6"></nz-option>
+          <nz-option nzValue="7" nzLabel="7"></nz-option>
+        </nz-select>
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your part !
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- task -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Task</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-select [(ngModel)]="selectedTask" nzAllowClear nzPlaceHolder="{{data.task}}" formControlName="task">
+          <nz-option nzValue="1" nzLabel="1"></nz-option>
+          <nz-option nzValue="2" nzLabel="2"></nz-option>
+          <nz-option nzValue="3" nzLabel="3"></nz-option>
+          <nz-option nzValue="4" nzLabel="4"></nz-option>
+          <nz-option nzValue="5" nzLabel="5"></nz-option>
+        </nz-select>
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your task !
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid" style="float: right">Save</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div style="padding-bottom: 12px;"></div>
+</nz-modal>
+
+<!-- modalDetail -->
+<nz-modal [(nzVisible)]="detailVisible" nzTitle="{{null}}" [nzFooter]="null" (nzOnCancel)="handleCancel()"
+  nzWrapClassName="vertical-center-modal">
+  <div class="card">
+    <div class="additional">
+      <div class="user-card">
+        <!-- avatar -->
+
+        <nz-avatar [nzSize]="120" nzIcon="user" nzSrc={{data.image}}></nz-avatar>
+        <div class="question">
+          <p>${{data.question}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="question">
+      <h1>{{data.question}}</h1>
+
+      <div class="row">
+        <p style="font-weight: bold;">A: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.answer_a}}
+        </p>
+      </div>
+
+      <div class="row">
+        <p style="font-weight: bold;">B: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.answer_b}}
+        </p>
+      </div>
+
+      <div class="row">
+        <p style="font-weight: bold;">C: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.answer_c}}
+      </div>
+      <div class="row">
+        <p style="font-weight: bold;">D: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.answer_d}}
+      </div>
+      <div class="row">
+        <p style="font-weight: bold;">Answer correct: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.answer_correct}}
+      </div>
+      <div class="row">
+        <p style="font-weight: bold;">is_Deleted: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">
+          {{data.is_Deleled === true ? 'True' : 'False'}}
+        </p>
+      </div>
+      <div class="row">
+        <p style="font-weight: bold;">Part </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.part}}
+      </div>
+      <div class="row">
+        <p style="font-weight: bold;">Task: </p>
+        <p style="font-weight: normal; color: rgb(0, 167, 0); font-size: large;">{{data.task}}
+      </div>
+      <div class="row" style="flex-wrap: wrap;">
+        <p style="font-weight: bold; width: 100%;">Status: </p>
+        <p style="font-weight: normal; color: #C4BEC4;">
+          {{data.status}}
+        </p>
+      </div>
+    </div>
+  </div>
+</nz-modal>
